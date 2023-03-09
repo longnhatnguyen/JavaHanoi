@@ -8,6 +8,8 @@ public class Main {
         honda.bienSo = "1999";
         honda.namSx = 2008;
         honda.run();
+        System.out.println();
+
     }
 }
 
