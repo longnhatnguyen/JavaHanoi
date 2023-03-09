@@ -1,0 +1,28 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+E.Contract/.vs/E.Contract/*
+E.Contract/.vs/ProjectEvaluation/*
+E.Contract/E.Contract.API/obj/*
+E.Contract/E.Contract.API/bin/*
+E.Contract/E.Contract.Framework.Validator/obj/*
+E.Contract/E.Contract.Framework.Validator/bin/*
+/E.Contract/E.Contract.API/Properties/PublishProfiles

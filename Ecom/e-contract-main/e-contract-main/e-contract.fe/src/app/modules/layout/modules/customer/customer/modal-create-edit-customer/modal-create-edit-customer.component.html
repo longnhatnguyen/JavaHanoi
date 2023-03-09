@@ -1,0 +1,368 @@
+<div class="" id="kt_modal_add_user" tabindex="-1">
+  <div class="" style="margin: 0; width: 100%">
+    <div class="modal-content">
+      <div class="modal-header" id="kt_modal_add_user_header">
+        <ng-container *ngIf="role == 'customer'; else admin">
+          <h2 *ngIf="!itemDetail" class="fw-bolder">Thêm mới khách hàng</h2>
+          <h2 *ngIf="itemDetail" class="fw-bolder">Cập nhật tin khách hàng</h2>
+        </ng-container>
+        <ng-template #admin>
+          <h2 class="fw-bolder">Thông tin khách hàng</h2>
+        </ng-template>
+      </div>
+      <div class="modal-body mx-5 mx-xl-15 my-7">
+        <!-- <div>{{formGroupCreate.value | json}}</div> -->
+        <form
+          class=""
+          [formGroup]="formGroupCreate"
+          novalidate
+          id="kt_modal_add_user_form"
+          class="form"
+          action="#"
+        >
+          <div class="d-flex me-n7 pe-7 form-wrap">
+            <div
+              class="fv-row mb-7 col-12 col-sm-3 col-md-3 col-lg-3 col-xl-2 col-xxl-2"
+            >
+              <label class="fw-bold fs-6 mb-2" for="Admin_code"
+                >Ảnh đại diện</label
+              >
+              <div class="col-md-10">
+                <upload-file
+                  #fileUploadIcon
+                  [type]="1"
+                  [maxlength]="1"
+                  [fileTitle]="'Ảnh'"
+                >
+                </upload-file>
+              </div>
+            </div>
+
+            <div
+              class="fv-row mb-7 col-12 col-sm-9 col-md-9 col-lg-9 col-xl-10 col-xxl-10"
+              style="
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+              "
+            >
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"
+                style="padding: 5px"
+              >
+                <label class="required fw-bold fs-6 mb-2" for="Admin_name"
+                  >Tên khách hàng</label
+                >
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="Nhập tên khách hàng"
+                />
+                <div
+                  *ngIf="
+                    !formGroupCreate.controls['name']?.valid &&
+                    formGroupCreate.controls['name']?.touched
+                  "
+                >
+                  <small
+                    *ngIf="formGroupCreate.get('name')?.errors?.['required']"
+                    style="color: red"
+                    >Tên khách hàng là bắt buộc</small
+                  >
+                  <small
+                    *ngIf="formGroupCreate.get('name')?.errors?.['maxlength']"
+                    style="color: red"
+                    >Tên khách hàng không vượt quá 50 ký tự</small
+                  >
+                </div>
+              </div>
+
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"
+                style="padding: 5px"
+              >
+                <label class="required fw-bold fs-6 mb-2" for="Admin_username"
+                  >Tên đăng nhập</label
+                >
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="username"
+                  class="form-control"
+                  placeholder="Nhập tên đăng nhập"
+                  disabled="true"
+                />
+                <div
+                  *ngIf="
+                    !formGroupCreate.controls['username']?.valid &&
+                    formGroupCreate.controls['username']?.touched
+                  "
+                >
+                  <small
+                    *ngIf="formGroupCreate.get('username')?.errors?.['required']"
+                    style="color: red"
+                    >Tên đăng nhập là bắt buộc</small
+                  >
+                  <small
+                    *ngIf="formGroupCreate.get('username')?.errors?.['maxlength']"
+                    style="color: red"
+                    >Chiều dài tên đầy đủ không vượt quá 50 ký tự</small
+                  >
+                </div>
+              </div>
+
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"
+                style="padding: 5px"
+              >
+                <label class="required fw-bold fs-6 mb-2" for="Admin_birthday"
+                  >Ngày sinh</label
+                >
+                <input
+                  class="form-control"
+                  formControlName="birthday"
+                  placeholder="Nhập ngày sinh"
+                  bsDatepicker
+                  [bsConfig]="{
+                    dateInputFormat: 'DD-MM-YYYY',
+                    returnFocusToInput: true
+                  }"
+                />
+              </div>
+
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"
+                style="padding: 5px"
+              >
+                <label
+                  class="required fw-bold fs-6 mb-2"
+                  for="Admin_phone_number"
+                  >Số CMT/CCCD</label
+                >
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="identity"
+                  class="form-control"
+                  placeholder="Nhập số chứng minh thư"
+                  (keypress)="numberOnly($event)"
+                />
+                <div
+                  *ngIf="
+                    !formGroupCreate.controls['identity']?.valid &&
+                    formGroupCreate.controls['identity']?.touched
+                  "
+                >
+                  <small
+                    *ngIf="formGroupCreate.get('identity')?.errors?.['required']"
+                    style="color: red"
+                    >Số chứng minh thư là bắt buộc</small
+                  >
+                  <small
+                    *ngIf="formGroupCreate.get('identity')?.errors?.['maxlength']"
+                    style="color: red"
+                    >Số chứng minh thư không vượt quá 20 số</small
+                  >
+                </div>
+              </div>
+
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"
+                style="padding: 5px"
+              >
+                <label
+                  class="required fw-bold fs-6 mb-2"
+                  for="Admin_phone_number"
+                  >Số điện thoại</label
+                >
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="phone"
+                  class="form-control"
+                  placeholder="Nhập số điện thoại"
+                  (keypress)="numberOnly($event)"
+                />
+                <div
+                  *ngIf="
+                    !formGroupCreate.controls['phone']?.valid &&
+                    formGroupCreate.controls['phone']?.touched
+                  "
+                >
+                  <small
+                    *ngIf="formGroupCreate.get('phone')?.errors?.['required']"
+                    style="color: red"
+                    >Số điện thoại là bắt buộc</small
+                  >
+                  <small
+                    *ngIf="formGroupCreate.get('phone')?.errors?.['minlength']"
+                    style="color: red"
+                    >Số điện thoại không dưới 9 số</small
+                  >
+                  <small
+                    *ngIf="formGroupCreate.get('phone')?.errors?.['maxlength']"
+                    style="color: red"
+                    >Số điện thoại không vượt quá 14 số</small
+                  >
+                </div>
+              </div>
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6"
+                style="padding: 5px"
+              >
+                <label class="fw-bold fs-6 mb-2" for="Admin_phone_number"
+                  >Mã khách hàng</label
+                >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    pInputText
+                    formControlName="code"
+                    class="form-control"
+                    placeholder=""
+                    disabled="true"
+                  />
+                  <button class="btn btn-sm btn-primary" (click)="copyCode()">
+                    Sao chép mã
+                  </button>
+                </div>
+              </div>
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"
+                style="padding: 5px"
+              >
+                <label class="required fw-bold fs-6 mb-2" for="Admin_address"
+                  >Nơi đăng ký địa chỉ thường trú</label
+                >
+                <textarea
+                  formControlName="address"
+                  id="Admin_address"
+                  class="form-control"
+                  name="page_key_word"
+                >
+                </textarea>
+                <div
+                  *ngIf="
+                    !formGroupCreate.controls['address']?.valid &&
+                    formGroupCreate.controls['address']?.touched
+                  "
+                >
+                  <small
+                    *ngIf="formGroupCreate.get('address')?.errors?.['required']"
+                    style="color: red"
+                    >Địa chỉ là bắt buộc</small
+                  >
+                </div>
+              </div>
+
+              <div
+                class="fv-row mb-7 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"
+                style="padding: 5px"
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div class="fw-bold fs-6 mb-2">Thông tin ngân hàng</div>
+                  <i
+                    class="fa-solid fa-plus"
+                    style="color: rgb(31, 236, 48); font-size: 16px"
+                    (click)="addBanks()"
+                    *appHasRole="['CUSTOMERMODIFY']"
+                  ></i>
+                </div>
+                <div formArrayName="banks">
+                  <ng-container
+                    *ngFor="let bank of listBankArray.controls; let i = index"
+                  >
+                    <ng-container
+                      [formGroup]="bank"
+                      *ngIf="listBankArray.value[i].is_delete === false"
+                    >
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          flex-wrap: wrap;
+                        "
+                      >
+                        <div
+                          class="fv-row mb-7 col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5"
+                          style="padding: 5px"
+                        >
+                          <label
+                            class="required fw-bold fs-6 mb-2"
+                            for="Admin_name"
+                            >Tên ngân hàng</label
+                          >
+
+                          <p-dropdown
+                            [options]="listBank"
+                            formControlName="bank_name"
+                            placeholder="Chọn ngân hàng"
+                            [showClear]="true"
+                            filter="true"
+                          ></p-dropdown>
+                        </div>
+
+                        <div
+                          class="fv-row mb-7 col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5 col-xxl-5"
+                          style="padding: 5px"
+                        >
+                          <label
+                            class="required fw-bold fs-6 mb-2"
+                            for="Admin_phone_number"
+                            >Số tài khoản ngân hàng</label
+                          >
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="bank_account"
+                            class="form-control"
+                            placeholder="Nhập số tài khoản ngân hàng"
+                            (keypress)="numberOnly($event)"
+                          />
+                        </div>
+
+                        <i
+                          class="fa-solid fa-trash-arrow-up"
+                          style="color: rgb(236, 55, 31); font-size: 16px"
+                          (click)="removeBanks(i)"
+                          *appHasRole="['CUSTOMERMODIFY']"
+                        ></i>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center pt-15">
+            <button
+              *appHasRole="['CUSTOMERMODIFY']"
+              type="submit"
+              class="btn btn-primary"
+              data-kt-users-modal-action="submit"
+              (click)="save()"
+              [disabled]="!formGroupCreate.valid"
+            >
+              <span class="indicator-label">Lưu</span>
+              <span class="indicator-progress"
+                >Please wait...
+                <span
+                  class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span
+              ></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

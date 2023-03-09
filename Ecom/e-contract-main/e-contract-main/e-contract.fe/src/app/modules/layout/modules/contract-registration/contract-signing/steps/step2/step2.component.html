@@ -1,0 +1,34 @@
+<!-- https://api-dev.smartgapcontract.vn/api/file/view-img?url_file/data/econtract_files/dh/41dbc249-0646-4e64-b2de-e4e9eb0faf34.docx -->
+<p-table
+  [value]="listInvestmentPackage"
+  [(selection)]="selected"
+  (onRowSelect)="selectItem($event)"
+  dataKey="id"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th>Tên gói đầu tư</th>
+      <th>Số tiền đầu tư</th>
+      <th>Số cổ phần</th>
+      <th>Giá trị lợi tức</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-package>
+    <tr>
+      <td>
+        <p-tableRadioButton
+          [value]="package"
+          [disabled]="contract.status >= 1"
+        ></p-tableRadioButton>
+      </td>
+      <td>{{ package.name }}</td>
+      <td>{{ package.price | number: "0.0-0" }} VNĐ</td>
+      <td>{{ package.capital_value | number: "0.0-0" }}</td>
+      <td>{{ package.income | number:"0.0-0" }} %</td>
+    </tr>
+  </ng-template>
+</p-table>
+<p class="text-danger">Lưu ý(*): Khi bạn chuyển đến bước tiếp theo sẽ không thể chọn lại gói đầu tư</p>
+

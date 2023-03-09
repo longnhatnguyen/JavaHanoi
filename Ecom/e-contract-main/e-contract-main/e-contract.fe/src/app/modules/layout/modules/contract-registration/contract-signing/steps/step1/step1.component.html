@@ -1,0 +1,438 @@
+<div *ngIf="suggestUpdateInfo">
+  <span class="text-danger"
+    >Vui lòng
+    <a href="javascript:void(0)" (click)="updateCustomerInfo()"
+      >cập nhật thông tin tài khoản</a
+    >
+    để có trải nghiệm tốt hơn!
+  </span>
+</div>
+<div class="form-check-inline">
+  <input
+    class="form-check-input"
+    style="width: 15px; height: 15px; margin-top: 3px; margin-right: 5px"
+    [value]="0"
+    [(ngModel)]="contract.type"
+    (click)="resetForm()"
+    type="radio"
+    name="flexRadioDefault"
+    checked
+    [disabled]="contract.id !== 0"
+  />
+  <label class="form-check-label" for="flexRadioDefault1"> Cá nhân </label>
+</div>
+<div class="form-check-inline">
+  <input
+    class="form-check-input"
+    style="width: 15px; height: 15px; margin-top: 3px; margin-right: 5px"
+    [value]="1"
+    [(ngModel)]="contract.type"
+    type="radio"
+    (click)="resetForm()"
+    name="flexRadioDefault"
+    [disabled]="contract.id !== 0"
+  />
+  <label class="form-check-label" for="flexRadioDefault2"> Doanh nghiệp </label>
+</div>
+<div *ngIf="contract.type === 1">
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Tên doanh nghiệp <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.customer_enterprise_name }"
+        [(ngModel)]="contract.customer_enterprise_name"
+        name="otp"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Tên viết tắt <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.customer_enterprise_short_name }"
+        [(ngModel)]="contract.customer_enterprise_short_name"
+        name="otp"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Mã doanh nghiệp <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        [ngClass]="{ 'border-danger': errors.customer_enterprise_code }"
+        [(ngModel)]="contract.customer_enterprise_code"
+        class="form-control"
+        type="text"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Mã số thuế <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        [ngClass]="{ 'border-danger': errors.customer_tax_code }"
+        [(ngModel)]="contract.customer_tax_code"
+        class="form-control"
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Họ tên nhà đầu tư <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.customer_deputy }"
+        name="otp"
+        [(ngModel)]="contract.customer_deputy"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Email <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        name="otp"
+        [ngClass]="{ 'border-danger': errors.customer_email }"
+        [(ngModel)]="contract.customer_email"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Số điện thoại <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        [ngClass]="{ 'border-danger': errors.customer_phone }"
+        [(ngModel)]="contract.customer_phone"
+        type="text"
+      />
+    </div>
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column"
+    >
+      <label class="fw-bold fs-6 mb-2"
+        >Ngày sinh <span class="text-danger">(*)</span></label
+      >
+      <p-calendar
+        inputId="basic"
+        class="col-12"
+        [ngClass]="{ 'border-danger': errors.customer_date_of_birth }"
+        [(ngModel)]="contract.customer_date_of_birth"
+      >
+      </p-calendar>
+    </div>
+  </div>
+
+  <div class="row pt-5">
+    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2">Giới tính </label>
+      <input class="form-control" type="otp" name="otp" autocomplete="off" />
+    </div> -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Số CMT/ CCCD <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.customer_id_number }"
+        [(ngModel)]="contract.customer_id_number"
+        name="otp"
+        autocomplete="off"
+      />
+    </div>
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column"
+    >
+      <label class="fw-bold fs-6 mb-2"
+        >Ngày cấp <span class="text-danger">(*)</span></label
+      >
+      <p-calendar
+        inputId="basic"
+        class="col-12"
+        [ngClass]="{ 'border-danger': errors.issuance_date }"
+        [(ngModel)]="contract.issuance_date"
+      >
+      </p-calendar>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <label class="fw-bold fs-6 mb-2"
+        >Cơ quan cấp <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.passport_issuer }"
+        [(ngModel)]="contract.passport_issuer"
+        name="otp"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Tên ngân hàng <span class="text-danger">(*)</span></label
+      >
+      <p-dropdown
+        styleClass="w-100"
+        [options]="user.banks"
+        [ngClass]="{ 'border-danger': errors.customer_bank_account_id }"
+        [(ngModel)]="contract.customer_bank_account_id"
+        (onChange)="changeBankAccount($event)"
+        placeholder="Chọn tài khoản ngân hàng"
+        optionValue="id"
+        optionLabel="bank_label"
+      ></p-dropdown>
+      <!-- <input
+        pInputText
+        class="form-control"
+        type="text"
+        [ngClass]="{'border-danger':errors.customer_bank_name}"
+        [(ngModel)]="contract.customer_bank_name"
+      /> -->
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2">Số tài khoản </label>
+      <input
+        disabled
+        pInputText
+        class="form-control"
+        type="text"
+        [ngClass]="{ 'border-danger': errors.customer_account_number }"
+        [(ngModel)]="contract.customer_account_number"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <label class="fw-bold fs-6 mb-2"
+        >Nơi đăng ký địa chỉ thường trú
+        <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        name="otp"
+        [ngClass]="{ 'border-danger': errors.customer_address }"
+        [(ngModel)]="contract.customer_address"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <label class="fw-bold fs-6 mb-2">Ghi chú </label>
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        name="otp"
+        [(ngModel)]="contract.note"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+</div>
+<div *ngIf="contract.type === 0">
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Họ tên nhà đầu tư <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        name="otp"
+        [(ngModel)]="user.name"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Email <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        [ngClass]="{ 'border-danger': errors.customer_email }"
+        type="otp"
+        name="otp"
+        [(ngModel)]="contract.customer_email"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Số điện thoại <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        [ngClass]="{ 'border-danger': errors.customer_phone }"
+        [(ngModel)]="contract.customer_phone"
+        type="text"
+      />
+    </div>
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column"
+    >
+      <label class="fw-bold fs-6 mb-2"
+        >Ngày sinh <span class="text-danger">(*)</span></label
+      >
+      <p-calendar
+        inputId="basic"
+        class="col-12"
+        [ngClass]="{ 'border-danger': errors.customer_date_of_birth }"
+        [(ngModel)]="contract.customer_date_of_birth"
+      >
+      </p-calendar>
+    </div>
+  </div>
+
+  <div class="row pt-5">
+    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2">Giới tính </label>
+      <input class="form-control" type="otp" name="otp" autocomplete="off" />
+    </div> -->
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Số CMT/ CCCD <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.customer_id_number }"
+        [(ngModel)]="contract.customer_id_number"
+        name="otp"
+        autocomplete="off"
+      />
+    </div>
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column"
+    >
+      <label class="fw-bold fs-6 mb-2"
+        >Ngày cấp <span class="text-danger">(*)</span></label
+      >
+      <p-calendar
+        inputId="basic"
+        class="col-12"
+        [ngClass]="{ 'border-danger': errors.issuance_date }"
+        [(ngModel)]="contract.issuance_date"
+      >
+      </p-calendar>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <label class="fw-bold fs-6 mb-2"
+        >Cơ quan cấp <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.passport_issuer }"
+        [(ngModel)]="contract.passport_issuer"
+        name="otp"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2"
+        >Tên ngân hàng <span class="text-danger">(*)</span></label
+      >
+      <p-dropdown
+        styleClass="w-100"
+        [ngClass]="{ 'border-danger': errors.customer_bank_account_id }"
+        [options]="user.banks"
+        [(ngModel)]="contract.customer_bank_account_id"
+        (onChange)="changeBankAccount($event)"
+        placeholder="Chọn tài khoản ngân hàng"
+        optionValue="id"
+        optionLabel="bank_label"
+      ></p-dropdown>
+      <!-- <input
+        pInputText
+        class="form-control"
+        type="text"
+        [ngClass]="{'border-danger':errors.customer_bank_name}"
+        [(ngModel)]="contract.customer_bank_name"
+      /> -->
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3">
+      <label class="fw-bold fs-6 mb-2">Số tài khoản</label>
+      <input
+        disabled
+        pInputText
+        class="form-control"
+        type="text"
+        [ngClass]="{ 'border-danger': errors.customer_account_number }"
+        [(ngModel)]="contract.customer_account_number"
+      />
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <label class="fw-bold fs-6 mb-2"
+        >Nơi đăng ký địa chỉ thường trú
+        <span class="text-danger">(*)</span></label
+      >
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        [ngClass]="{ 'border-danger': errors.customer_address }"
+        name="otp"
+        [(ngModel)]="contract.customer_address"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row pt-5">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <label class="fw-bold fs-6 mb-2">Ghi chú</label>
+      <input
+        pInputText
+        class="form-control"
+        type="otp"
+        name="otp"
+        [(ngModel)]="contract.note"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+</div>
+<button
+  *ngIf="contract.id === 0"
+  type="button"
+  class="btn btn-primary"
+  style="position: absolute; margin-top: 16.25px !important; right: 2.25rem"
+  (click)="createContract()"
+>
+  Tiếp tục
+</button>

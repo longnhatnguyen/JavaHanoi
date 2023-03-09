@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Get coordinates of the mouse pointer</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/@goongmaps/goong-js@1.0.9/dist/goong-js.css" rel="stylesheet" />
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<style type="text/css">
+		#info {
+			display: block;
+			position: relative;
+			margin: 0px auto;
+			width: 50%;
+			padding: 10px;
+			border: none;
+			border-radius: 3px;
+			font-size: 12px;
+			text-align: center;
+			color: #222;
+			background: #fff;
+		}
+	</style>
+	<div id="map"></div>
+	<script>
+		goongjs.accessToken = 'MgO7jfiFRiX3pMRTjzPvW38fSIC5zkbGvDcMJDtB';
+		var map = new goongjs.Map({
+			container: 'map', // container id
+			style: 'https://tiles.goong.io/assets/goong_map_web.json',
+			center: [105.84514, 21.0279], // starting position
+			//center: [lng, lat],
+			zoom: 12 // starting zoom
+		});
+
+		let startPosition = parent.document.getElementById('selectCoords').value;
+
+		let lng = '105.84514';
+		let lat = '21.0279';
+		if (startPosition) {
+			lng = JSON.parse(startPosition).lng;
+			lat = JSON.parse(startPosition).lat;
+		}
+		map.setCenter([lng, lat]);
+
+		var markerLoad;
+		if (startPosition) {
+			markerLoad = new goongjs.Marker().setLngLat(JSON.parse(startPosition)).addTo(map);
+		}
+		var markerAdd;
+		map.on('click', function (e) {
+			// e.lngLat is the longitude, latitude geographical position of the event
+			//parent.document.getElementById('info').innerHTML = JSON.stringify(e.lngLat.wrap());
+			parent.document.getElementById('selectCoords').value = JSON.stringify(e.lngLat.wrap());
+
+			if (markerLoad) {
+				markerLoad.remove();
+			}
+			if (markerAdd) {
+				markerAdd.remove();
+			}
+
+			markerAdd = new goongjs.Marker().setLngLat(e.lngLat.wrap()).addTo(map);
+
+		});
+	</script>
+
+</body>
+
+</html>

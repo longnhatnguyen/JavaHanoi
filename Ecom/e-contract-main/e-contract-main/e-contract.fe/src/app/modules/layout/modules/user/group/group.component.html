@@ -1,0 +1,73 @@
+<h1>Quản lý danh sách nhóm</h1>
+<hr />
+<div class="list-item">
+  <div>
+    <h2 class="m-0">Danh sách nhóm</h2>
+  </div>
+  <div class="create">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openCreateEditGroupModal(null, 0)"
+    >
+      Thêm mới
+    </button>
+  </div>
+</div>
+<div class="table-responsive card-body py-4">
+  <table
+    class="table align-middle table-row-dashed fs-6 gy-5"
+    id="kt_table_users"
+  >
+    <thead>
+      <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+        <th class="min-w-20px">STT</th>
+        <th class="min-w-125px">Mã nhóm</th>
+        <th class="min-w-125px">Tên nhóm</th>
+        <th class="min-w-125px">Trạng thái</th>
+        <th class="min-w-125px">Ghi chú</th>
+        <th class="min-w-100px action">Hoạt động</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 fw-bold">
+      <tr *ngFor="let group of groupList; let i = index">
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td>{{ group.code }}</td>
+        <td>{{ group.name }}</td>
+        <td>{{ !group.is_delete ? "Kích hoạt" : "Đã dừng" }}</td>
+        <td>{{ group.note }}</td>
+        <td class="action">
+          <i
+            class="fa-solid fa-highlighter"
+            pTooltip="Chỉnh sửa phiếu"
+            tooltipPosition="bottom"
+            style="color: rgb(40, 122, 209); margin-right: 5px"
+            (click)="openCreateEditGroupModal(group, i)"
+          ></i>
+          <i
+            class="fa-solid fa-trash-arrow-up"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            style="color: rgb(207, 41, 35); margin-right: 10px"
+            (click)="deleteGroup(group)"
+          ></i>
+          <i
+            class="fa-solid fa-user"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            style="color: rgb(46, 86, 216); margin-right: 10px"
+            (click)="openCreateModifyUserGroupModal(group, 0)"
+          ></i>
+
+          <span
+            style="font-size: 16px; margin-right: 5px"
+            class="group"
+            (click)="openCreateModifyRoleGroupModal(group, 0)"
+          >
+            <i style="color: rgb(182, 16, 65);" class="fa-solid fa-user-shield"></i>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

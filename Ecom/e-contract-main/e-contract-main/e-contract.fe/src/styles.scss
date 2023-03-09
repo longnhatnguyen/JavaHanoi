@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/sass/style.scss";
+// @import "./assets/sass/style";
+// Replace above style with this css file to enable RTL styles
+// @import "./assets/css/style.rtl";
+@import './assets/sass/plugins.scss';
+@import "./assets/sass/style.angular.scss";
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import '~ngx-toastr/toastr.css';
+
+.fa-solid {
+  cursor: pointer;
+}
+
+th {
+  font-weight: 600;
+  font-size: 14px !important;
+  color: rgb(43, 42, 42) !important;
+  max-width: 300px;
+}
+
+td {
+  font-weight: 500 !important;
+  color: rgb(73, 73, 73) !important;
+  max-width: 300px;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+.p-calendar .p-inputtext {
+  background-color: #f5f8fa !important;
+  border-color: #f5f8fa !important;
+}
+
+.p-dropdown.solid {
+  background-color: #f5f8fa !important;
+  border-color: #f5f8fa !important;
+}
+
+.p-dropdown {
+  width: 100%;
+}
+
+.p-calendar {
+  width: 100% !important;
+}
+
+.p-calendar .p-inputtext {
+  background-color: transparent !important;
+  height: 41px !important;
+  border: 1px solid #ced4da !important;
+}
+
+.border-danger .p-inputtext {
+  background-color: transparent !important;
+  height: 41px !important;
+  border: 1px solid red !important;
+}
+
+.stepper-item {
+  cursor: pointer;
+}
+
+th:last-child,
+td:last-child {
+  border-bottom: none;
+}
+
+.p-disabled,
+.p-component:disabled {
+  opacity: 0.9 !important;
+}
+
+.nav-link.active-09 {
+  font-weight: bold !important;
+  text-decoration: underline !important;
+  color: #009ef7 !important;
+}
+
+
+p-dropdown {
+  padding: 0 !important;
+}
+
+.toast-container {
+  position: fixed !important;
+}

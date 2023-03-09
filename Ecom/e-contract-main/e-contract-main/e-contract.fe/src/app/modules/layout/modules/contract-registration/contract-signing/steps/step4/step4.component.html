@@ -1,0 +1,23 @@
+<div class="fv-row mb-7">
+  <div style="max-width: 600px;">
+    <ng-container *ngIf="contract.status>=2">
+      <p style="font-size: 16px;">Bạn đã ký xác thực cho hợp đồng này rồi!</p>
+    </ng-container>
+    <ng-container *ngIf="contract.status<2">
+      <p style="font-size: 16px;">Xác nhận ký hợp đồng</p>
+      <div class="input-group">
+        <input class="form-control form-control-lg form-control-solid" placeholder="Số điện thoại"
+          [(ngModel)]="contract.customer_phone" disabled />
+        <button type="button" class="btn btn-lg btn-primary" (click)="sendOTP()" [disabled]="disableSend">
+          <span class="indicator-label" style="width:98px !important;display:inline-block">Lấy mã OTP</span>
+        </button>
+      </div>
+      <div class="input-group pt-5" *ngIf="!disableConfirm">
+        <input class="form-control form-control-lg form-control-solid" placeholder="OTP" [(ngModel)]="OTP" [disable]="disableConfirm"/>
+        <button type="button" class="btn btn-lg btn-primary" (click)="confirmOTP()" [disabled]="disableConfirm">
+          <span class="indicator-label">Xác nhận OTP</span>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

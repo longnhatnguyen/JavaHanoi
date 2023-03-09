@@ -1,0 +1,211 @@
+<div class="" id="kt_modal_add_user" tabindex="-1" *ngIf="!loading">
+  <div class="" style="margin: 0; width: 100%">
+    <div class="modal-content">
+      <div class="modal-header" id="kt_modal_add_user_header">
+        <h1 class="fw-bolder">Thông tin cửa hàng</h1>
+      </div>
+      <div class="modal-body mx-5 mx-xl-15 my-7">
+        <!-- <div>{{ formGroupCreate.value | json }}</div> -->
+        <form
+          class=""
+          [formGroup]="formGroupCreate"
+          novalidate
+          id="kt_modal_add_user_form"
+          class="form"
+          action="#"
+        >
+          <div
+            class="me-n7 pe-7 form-wrap"
+            id="kt_modal_add_user_scroll"
+            data-kt-scroll="true"
+            data-kt-scroll-activate="{default: false, lg: true}"
+            data-kt-scroll-dependencies="#kt_modal_add_user_header"
+            data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+            data-kt-scroll-offset="300px"
+          >
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_username"
+                >Tên cửa hàng</label
+              >
+              <input
+                type="text"
+                pInputText
+                formControlName="name"
+                class="form-control"
+                placeholder="Tên cửa hàng"
+                disabled="true"
+              />
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_username"
+                >Địa chỉ cửa hàng</label
+              >
+              <input
+                type="text"
+                pInputText
+                formControlName="address"
+                class="form-control"
+                placeholder="Địa chỉ cửa hàng"
+                disabled="true"
+              />
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_phone_number"
+                >Giá trị đầu tư</label
+              >
+              <div class="col-12 md:col-7 lg:col-7 xl:col-7">
+                <div class="p-inputgroup col-12 md:col-12 lg:col-12 xl:col-12">
+                  <p-inputNumber
+                    autocomplete="off"
+                    inputId="locale-vie"
+                    mode="decimal"
+                    locale="vi-VN"
+                    [minFractionDigits]="0"
+                    aria-describedby="weight-help"
+                    formControlName="capital_value"
+                    placeholder="Nhập giá trị đầu tư"
+                    disabled="true"
+                  >
+                  </p-inputNumber>
+                  <span class="p-inputgroup-addon">VNĐ</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_phone_number"
+                >Giá trị hiện tại</label
+              >
+
+              <div class="col-12 md:col-7 lg:col-7 xl:col-7">
+                <div class="p-inputgroup col-12 md:col-12 lg:col-12 xl:col-12">
+                  <p-inputNumber
+                    autocomplete="off"
+                    inputId="locale-vie"
+                    mode="decimal"
+                    locale="vi-VN"
+                    [minFractionDigits]="0"
+                    aria-describedby="weight-help"
+                    formControlName="brand_value"
+                    placeholder="Nhập giá trị hiện tại"
+                    disabled="true"
+                  >
+                  </p-inputNumber>
+                  <span class="p-inputgroup-addon">VNĐ</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_phone_number"
+                >Diện tích</label
+              >
+
+              <div class="col-12 md:col-7 lg:col-7 xl:col-7">
+                <div class="p-inputgroup col-12 md:col-12 lg:col-12 xl:col-12">
+                  <p-inputNumber
+                    autocomplete="off"
+                    inputId="locale-vie"
+                    mode="decimal"
+                    locale="vi-VN"
+                    [minFractionDigits]="0"
+                    aria-describedby="weight-help"
+                    formControlName="acreage"
+                    placeholder="Nhập diện tích"
+                    disabled="true"
+                  >
+                  </p-inputNumber>
+                  <span class="p-inputgroup-addon">m2</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_sex"
+                >Loại cửa hàng</label
+              >
+              <input
+                type="text"
+                pInputText
+                value="{{ itemDetail.type_name }}"
+                class="form-control"
+                placeholder="Loại cửa hàng"
+                disabled="true"
+              />
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_birthday"
+                >Ngày khai trương</label
+              >
+              <input
+                type="date"
+                pInputText
+                formControlName="opening_day"
+                class="form-control"
+                disabled="true"
+              />
+            </div>
+
+            <div style="padding: 5px" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_code"
+                >Địa chỉ trên bản đồ:
+              </label>
+              <!-- <add-location-map
+                #addMapModal
+                (coordinate)="getCoordinate($event)"
+                [location]="location"
+                [locationShow]="locationShow"
+              ></add-location-map> -->
+
+              <add-location-map
+                #addMapModal
+                (coordinate)="getCoordinate($event)"
+                [location]="location"
+                [address]="input.address"
+                [locationShow]="locationShow"
+                [address]="formGroupCreate.value.address"
+              ></add-location-map>
+            </div>
+
+            <div
+              style="padding: 5px"
+              style="
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: wrap;
+              "
+              class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 fv-row mb-7"
+            >
+              <ng-container *ngIf="itemDetail">
+                <ng-container *ngFor="let img of itemDetail.files">
+                  <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                    <img src="{{ url }}{{ img.path }}" alt="" />
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+
+            <div style="padding: 5px" class="col-12 fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_username"
+                >Mô tả</label
+              >
+              <textarea
+                pInputTextarea
+                [rows]="4"
+                type="text"
+                formControlName="note"
+                class="form-control"
+                placeholder="Ghi chú"
+                disabled="true"
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

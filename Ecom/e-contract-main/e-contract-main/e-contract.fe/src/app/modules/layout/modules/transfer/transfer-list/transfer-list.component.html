@@ -1,0 +1,163 @@
+<h1>Quản lý phiên chuyển tiền</h1>
+<hr />
+<div class="wrap">
+  <form [formGroup]="formGroupCreate" class="form-wrap col-12">
+    <!-- <div>{{formGroupCreate.value | json}}</div> -->
+    <div
+      class="row col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-6 item"
+    >
+      <label class="col-12 col-form-label fw-bold fs-6"> Từ khóa </label>
+      <input
+        pInputText
+        type="text"
+        class="form-control col-12"
+        placeholder="Từ khóa"
+        name="lName"
+        formControlName="keyword"
+        (keyup.enter)="search()"
+      />
+    </div>
+
+    <div
+      class="row col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-6 item"
+    >
+      <label class="col-12 col-form-label fw-bold fs-6"> Khách hàng </label>
+
+      <p-dropdown
+        class="col-12"
+        [options]="customerSearchList"
+        formControlName="customer_id"
+        (onChange)="search()"
+        placeholder="Chọn khách hàng"
+        [showClear]="true"
+        filter="true"
+        [disabled]="customer_id"
+      ></p-dropdown>
+    </div>
+
+    <div
+      class="row col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-6 item"
+    >
+      <label class="col-12 col-form-label fw-bold fs-6"> Hợp đồng </label>
+
+      <p-dropdown
+        class="col-12"
+        [options]="contractSearchList"
+        formControlName="contract_id"
+        (onChange)="search()"
+        placeholder="Chọn hợp đồng"
+        [showClear]="true"
+        filter="true"
+      ></p-dropdown>
+    </div>
+
+    <div
+      class="row col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-6 item"
+    >
+      <label class="col-12 col-form-label fw-bold fs-6"> Trạng thái </label>
+
+      <p-dropdown
+        class="col-12"
+        [options]="status_id"
+        formControlName="status_id"
+        (onChange)="search()"
+        placeholder="Chọn trạng thái"
+        [showClear]="true"
+      ></p-dropdown>
+    </div>
+
+    <div
+      class="row col-12 col-sm-12 col-md-4 col-lg-4 col-xl-12 col-xxl-12 mb-6 item search"
+    >
+      <button type="button" class="btn btn-primary" (click)="search()">
+        <ng-container>Tìm kiếm</ng-container>
+      </button>
+    </div>
+  </form>
+</div>
+<div class="table-responsive card-body py-4">
+  <table
+    class="table align-middle table-row-dashed fs-6 gy-5"
+    id="kt_table_users"
+  >
+    <thead>
+      <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+        <th class="min-w-20px">STT</th>
+        <th class="min-w-125px">Khách hàng</th>
+        <th class="min-w-125px">Mã hợp đồng</th>
+        <th class="min-w-125px">Ngân hàng</th>
+        <th class="min-w-125px">Số tài khoản</th>
+        <th class="min-w-125px">Số tiền chuyển</th>
+        <th class="min-w-125px">Trạng thái</th>
+        <th class="min-w-125px">Nội dung</th>
+        <th class="min-w-100px action">Hoạt động</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 fw-bold">
+      <tr *ngFor="let transfer of transferList; let i = index">
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td>{{ transfer.customer_name }}</td>
+        <td>{{ transfer.contract_number }}</td>
+        <td>{{ transfer.bank_name }}</td>
+        <td>{{ transfer.bank_account }}</td>
+        <td>{{ transfer.transfer_amount | number }}</td>
+        <td
+          [ngClass]="{
+            pending: transfer.status == 1,
+            complete: transfer.status == 2
+          }"
+        >
+          {{ transfer.status_name }}
+        </td>
+        <td>{{ transfer.transfer_content }}</td>
+        <td class="action">
+          <ng-container *appHasRole="['TRANSFERCHANGESTATUS']">
+            <i
+              *ngIf="transfer.status == 1"
+              class="fa-solid fa-circle-exclamation"
+              pTooltip="Trạng thái chờ xác nhận"
+              tooltipPosition="bottom"
+              style="color: rgb(235, 160, 47); margin-right: 5px"
+              (click)="changeStatusTransfer(transfer)"
+            ></i>
+            <i
+              *ngIf="transfer.status == 2"
+              class="fa-solid fa-circle-check"
+              pTooltip="Trạng thái chờ xác nhận"
+              tooltipPosition="bottom"
+              style="color: rgb(27, 118, 204); margin-right: 5px"
+            ></i>
+          </ng-container>
+          <i
+            class="fa-solid fa-eye"
+            style="color: rgb(88, 217, 37); margin-right: 10px"
+            (click)="openCreateModifyTransferModal(transfer)"
+          ></i>
+          <!-- <i
+            class="fa-solid fa-trash-arrow-up"
+            *ngIf="transfer.status != 2"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            style="color: rgb(217, 37, 37); margin-right: 10px"
+            (click)="deleteTransfer(transfer)"
+          ></i> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pagination
+    [totalItems]="totalRows"
+    [maxSize]="5"
+    [itemsPerPage]="formGroupCreate.value.page_size"
+    class="pagination-sm"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+    [boundaryLinks]="true"
+    (pageChanged)="onChangedPage($event)"
+    class="pull-right center"
+    style="margin-top: 10px"
+  ></pagination>
+</div>

@@ -1,0 +1,66 @@
+<h1>Quản lý danh sách phân quyền</h1>
+<hr />
+<div class="list-item">
+  <div>
+    <h2 class="m-0">Danh sách phân quyền</h2>
+  </div>
+  <div class="create">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openCreateEditRoleModal(null, 0)"
+    >
+      Thêm mới
+    </button>
+  </div>
+</div>
+<div class="table-responsive card-body py-4">
+  <table
+    class="table align-middle table-row-dashed fs-6 gy-5"
+    id="kt_table_users"
+  >
+    <thead>
+      <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+        <th class="min-w-20px">STT</th>
+        <th class="min-w-125px">Mã quyền</th>
+        <th class="min-w-125px">Tên quyền</th>
+        <th class="min-w-125px">Trạng thái</th>
+        <th class="min-w-125px">Ghi chú</th>
+        <th class="min-w-100px action">Hoạt động</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 fw-bold">
+      <tr *ngFor="let role of roleList; let i = index">
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td>{{ role.code }}</td>
+        <td>{{ role.name }}</td>
+        <td>{{ !role.is_delete ? "Kích hoạt" : "Đã dừng" }}</td>
+        <td>{{ role.note }}</td>
+        <td class="action">
+          <i
+            class="fa-solid fa-highlighter"
+            pTooltip="Chỉnh sửa phiếu"
+            tooltipPosition="bottom"
+            style="color: rgb(40, 122, 209); margin-right: 5px"
+            (click)="openCreateEditRoleModal(role, i)"
+          ></i>
+          <i
+            class="fa-solid fa-trash-arrow-up"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            style="color: rgb(207, 41, 35); margin-right: 10px"
+            (click)="deleteRole(role)"
+          ></i>
+          <span
+            style="font-size: 16px; margin-right: 5px"
+            class="group"
+            (click)="openCreateModifyGroupRoleModal(role, 0)"
+          >
+            <i class="fa-solid fa-user-group" style="color: rgb(46, 86, 216)"></i>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

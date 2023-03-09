@@ -1,0 +1,27 @@
+<ng-container *ngIf="fileItems[0]">
+  <p-galleria
+    [value]="fileItems"
+    [visible]="true"
+    [activeIndex]="1"
+    [responsiveOptions]="responsiveOptions"
+    [containerStyle]="{ 'max-width': '850px' }"
+    [numVisible]="7"
+    [circular]="true"
+    [fullScreen]="true"
+    [showItemNavigators]="false"
+    [showThumbnails]="false"
+    [baseZIndex]="100000"
+  >
+    <ng-template pTemplate="item" let-item>
+      <img
+        [src]="url + fileItems[0].path"
+        style="width: 100%; display: block"
+      />
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-item>
+      <div class="grid grid-nogutter justify-content-center">
+        <img [src]="url + fileItems[0].path" style="display: block" />
+      </div>
+    </ng-template>
+  </p-galleria>
+</ng-container>

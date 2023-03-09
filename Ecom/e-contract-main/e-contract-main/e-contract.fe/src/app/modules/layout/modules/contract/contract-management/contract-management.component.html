@@ -1,0 +1,151 @@
+<h1>Quản lý hợp đồng</h1>
+<hr />
+<div class="wrap">
+  <form [formGroup]="searchForm" class="form-wrap col-12">
+    <!-- <div>{{searchForm.value | json}}</div> -->
+    <div
+      class="row col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-6 item"
+    >
+      <label class="col-12 col-form-label fw-bold fs-6"> Từ khóa </label>
+      <input
+        type="text"
+        pInputText
+        class="form-control col-12"
+        placeholder="Từ khóa"
+        name="lName"
+        formControlName="keyword"
+        (keyup.enter)="search()"
+      />
+    </div>
+
+    <div
+      class="row col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-6 item"
+    >
+      <label class="col-12 col-form-label fw-bold fs-6"> Khách hàng </label>
+
+      <p-dropdown
+        class="col-12"
+        [options]="customerList"
+        formControlName="customer_id"
+        (onChange)="search()"
+        placeholder="Chọn khách hàng"
+        [showClear]="true"
+        filter="true"
+        [disabled]="customer_id"
+      ></p-dropdown>
+    </div>
+
+    <div
+      class="row col-12 col-sm-12 col-md-4 col-lg-4 col-xl-6 col-xxl-6 mb-6 search"
+    >
+      <button type="button" class="btn btn-primary" (click)="search()">
+        <ng-container>Tìm kiếm</ng-container>
+      </button>
+    </div>
+  </form>
+</div>
+<div class="list-item">
+  <div>
+    <h2 class="m-0">Danh sách hợp đồng</h2>
+  </div>
+  <div class="create">
+  </div>
+</div>
+<div class="table-responsive card-body py-4">
+  <table
+    class="table align-middle table-row-dashed fs-6 gy-5"
+    id="kt_table_users"
+  >
+    <thead>
+      <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+        <th class="w-50px">STT</th>
+        <th class="min-w-125px">Mã hợp đồng</th>
+        <th class="min-w-125px">Tên nhà đầu tư</th>
+        <th class="min-w-125px text-center">Ngày ký kết</th>
+        <th class="min-w-125px text-center">Cổ phần</th>
+        <th class="min-w-125px text-center">Mức đầu tư</th>
+        <th class="min-w-125px text-center">Đã thanh toán</th>
+        <th class="min-w-125px text-center">Còn phải thanh toán</th>
+        <th class="min-w-125px text-center">Trạng thái hợp đồng</th>
+        <th class="min-w-100px text-center action">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-600 fw-bold">
+      <tr *ngFor="let contract of contractList; let i = index">
+        <td scope="">{{ stt + (i + 1) }}</td>
+        <td scope="">{{ contract.contract_number }}</td>
+        <td scope="">{{ contract.customer_deputy }}</td>
+        <td class="text-center">
+          {{
+            contract.status < 2
+              ? "-"
+              : (contract.contract_signature_date | date: "dd/MM/yyyy")
+          }}
+        </td>
+        <td class="text-right">
+          {{ contract.number_of_shares | number: "0.0-0" }}
+        </td>
+        <td class="text-right">
+          {{ contract.amount_of_investment | number: "0.0-0" }}
+        </td>
+        <td class="text-right">{{ contract.amount_paid | number: "0.0-0" }}</td>
+        <td class="text-right">
+          {{
+            contract.amount_of_investment - contract.amount_paid
+              | number: "0.0-0"
+          }}
+        </td>
+        <td class="text-center" [ngClass]="colorList[contract.status]">
+          {{ statusList[contract.status] }}
+        </td>
+        <td class="action">
+          <!-- <i
+            class="fa-solid fa-highlighter"
+            pTooltip="Chỉnh sửa phiếu"
+            tooltipPosition="bottom"
+            style="color: rgb(40, 122, 209); margin-right: 5px"
+            (click)="openCreateModifyCustomerModal(contract)"
+          ></i> -->
+          <i
+            *ngIf="customer_id"
+            class="fa-solid fa-eye"
+            placement="bottom"
+            ngbTooltip="Chi tiết hợp đồng"
+            style="color: rgb(127, 204, 39)"
+            (click)="contractSigning(contract)"
+          ></i>
+          <i
+            *ngIf="!customer_id"
+            class="fa-solid fa-eye"
+            placement="bottom"
+            ngbTooltip="Xem hợp đồng"
+            style="color: rgb(127, 204, 39)"
+            (click)="openReviewContractModal(contract)"
+          ></i>
+
+          <!-- <i
+            class="fa-solid fa-trash-arrow-up"
+            pTooltip="Xoá"
+            tooltipPosition="bottom"
+            style="color: rgb(207, 41, 35); margin-right: 10px"
+            (click)="deleteCustomer(contract)"
+          ></i> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<pagination
+  [totalItems]="totalRows"
+  [maxSize]="5"
+  [itemsPerPage]="searchForm.value.page_size"
+  class="pagination-sm"
+  previousText="&lsaquo;"
+  nextText="&rsaquo;"
+  firstText="&laquo;"
+  lastText="&raquo;"
+  [boundaryLinks]="true"
+  (pageChanged)="onChangedPage($event)"
+  class="pull-right center"
+  style="margin-top: 10px"
+></pagination>

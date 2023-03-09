@@ -1,0 +1,194 @@
+<h1>Trang chủ</h1>
+<hr />
+
+<div
+  *ngIf="!loading"
+  class="card-body pt-0"
+  style="
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  "
+>
+  <div
+    style="padding: 5px"
+    class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3"
+  >
+    <div
+      class="bg-light-warning col-12 d-flex align-items-center rounded p-5"
+    >
+      <div class="flex-grow-1 me-2">
+        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6 title"
+          >Tổng số hợp đồng</a
+        >
+        <span class="text-muted fw-bold d-block" style="font-size: 20px">{{
+          dashboardInfor.total_contract
+        }}</span>
+      </div>
+      <span class="svg-icon svg-icon-warning me-5">
+        <span class="svg-icon svg-icon-1">
+          <i
+            style="font-size: 20px"
+            class="text-warning fa-solid fa-clipboard-list"
+          ></i>
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div
+    style="padding: 5px"
+    class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3"
+  >
+    <div
+      class="bg-light-success col-12 d-flex align-items-center rounded p-5"
+    >
+      <div class="flex-grow-1 me-2">
+        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6 title"
+          >Tổng số hợp đồng đã ký</a
+        >
+        <span class="text-muted fw-bold d-block" style="font-size: 20px">{{
+          dashboardInfor.total_completed_contract
+        }}</span>
+      </div>
+      <span class="svg-icon svg-icon-warning me-5">
+        <span class="svg-icon svg-icon-1">
+          <i
+            style="font-size: 20px"
+            class="text-success fa-solid fa-file-contract"
+          ></i>
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div
+    style="padding: 5px"
+    class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3"
+  >
+    <div
+      class="bg-light-danger col-12 d-flex align-items-center rounded p-5"
+    >
+      <div class="flex-grow-1 me-2">
+        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6 title"
+          >Tổng số hợp đồng chưa ký</a
+        >
+        <span class="text-muted fw-bold d-block" style="font-size: 20px">{{
+          dashboardInfor.total_draft_contract
+        }}</span>
+      </div>
+      <span class="svg-icon svg-icon-warning me-5">
+        <span class="svg-icon svg-icon-1">
+          <i
+            style="font-size: 20px"
+            class="text-danger fa-solid fa-file-signature"
+          ></i>
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div
+    style="padding: 5px"
+    class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3"
+  >
+    <div
+      class="bg-light-info col-12 d-flex align-items-center rounded p-5"
+    >
+      <div class="flex-grow-1 me-2">
+        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6 title"
+          >Tổng số khách hàng</a
+        >
+        <span class="text-muted fw-bold d-block" style="font-size: 20px">{{
+          dashboardInfor.total_customer
+        }}</span>
+      </div>
+      <span class="svg-icon svg-icon-warning me-5">
+        <span class="svg-icon svg-icon-1">
+          <i
+            style="font-size: 20px"
+            class="text-info fa-solid fa-user-group"
+          ></i>
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div
+    style="padding: 5px"
+    class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3"
+  >
+    <div
+      class="bg-light-info col-12 d-flex align-items-center rounded p-5"
+    >
+      <div class="flex-grow-1 me-2">
+        <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6 title"
+          >Tổng số phiên chuyển tiền</a
+        >
+        <span class="text-muted fw-bold d-block" style="font-size: 20px">{{
+          dashboardInfor.total_tranfer
+        }}</span>
+      </div>
+      <span class="svg-icon svg-icon-warning me-5">
+        <span class="svg-icon svg-icon-1">
+          <i
+            style="font-size: 20px"
+            class="text-info fa-solid fa-money-bill-trend-up"
+          ></i>
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="row g-5 g-xl-8">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+    <app-charts-widget2
+      class="card card-xl-stretch mb-5 mb-xl-8"
+      style="border: none"
+    >
+    </app-charts-widget2>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+    <app-charts-widget1
+      class="card card-xl-stretch mb-xl-8"
+      style="border: none"
+    >
+    </app-charts-widget1>
+  </div>
+</div>
+
+<!-- <div class="row g-5 g-xl-8">
+  <div class="col-xl-6">
+    <app-charts-widget3 class="card card-xl-stretch mb-xl-8">
+    </app-charts-widget3>
+  </div>
+  <div class="col-xl-6">
+    <app-charts-widget4 class="card card-xl-stretch mb-5 mb-xl-8">
+    </app-charts-widget4>
+  </div>
+</div>
+
+<div class="row g-5 g-xl-8">
+  <div class="col-xl-6">
+    <app-charts-widget5 class="card card-xl-stretch mb-xl-8">
+    </app-charts-widget5>
+  </div>
+  <div class="col-xl-6">
+    <app-charts-widget6 class="card card-xl-stretch mb-5 mb-xl-8">
+    </app-charts-widget6>
+  </div>
+</div>
+
+<div class="row g-5 g-xl-8">
+  <div class="col-xl-6">
+    <app-charts-widget7 class="card card-xl-stretch mb-xl-8">
+    </app-charts-widget7>
+  </div>
+  <div class="col-xl-6">
+    <app-charts-widget8 class="card card-xl-stretch mb-5 mb-xl-8">
+    </app-charts-widget8>
+  </div>
+</div> -->

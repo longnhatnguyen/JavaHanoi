@@ -1,0 +1,130 @@
+.row_page_add {
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 30px !important;
+}
+
+.row_page_add label {
+    width: 180px !important;
+    color: #5A6B6A !important;
+    font-size: 16px !important;
+    margin-right: 10px !important;
+    margin-bottom: 0 !important;
+    text-transform: none!important;
+}
+
+.row-title {
+    text-align: right !important;
+    padding-top: 10px !important;
+    color: #5A6B6A !important;
+    font-size: 16px !important;
+}
+
+.row_page_add input {
+
+    border: 1px solid #D1D1D1 !important;
+    border-radius: 5px !important;
+    height: 40px !important;
+    padding: 0 15px !important;
+}
+
+.row_page_add textarea {
+    width: 100% !important;
+    border: 1px solid #D1D1D1 !important;
+    border-radius: 5px !important;
+    height: 80px !important;
+    padding: 10px 0 0 5px !important
+}
+
+.row_page_add .right-content {
+    width: calc(100% - 190px) !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #6DB746;
+    border-color: #6db799;
+}
+
+.check_list_product {
+    display: inline-flex;
+    padding-right: 10px;
+}
+
+.checkbox_chon_sp_modal label {
+    cursor: pointer;
+    font-weight: 400;
+    width: 100%;
+    text-transform: capitalize;
+    color: #5A6B6A;
+    font-size: 14px;
+    font-family: "Lato", sans-serif;
+    line-height: 1.4;
+    margin-bottom: 0;
+    color: #424747;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox_chon_sp_modal label input[type="checkbox"] {
+    display: none;
+
+}
+
+.checkbox_chon_sp_modal label input[type="checkbox"]+span::before {
+    cursor: pointer;
+    font-family: fontAwesome;
+    font-size: 13px;
+    color: #000;
+    content: "\a0";
+    border: 1px solid #BFBFBF;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+    border-radius: 2px;
+    display: inline-flex;
+    text-align: center;
+    height: 16px;
+    line-height: 16px;
+    background: #fff;
+    width: 16px;
+    margin-right: 8px;
+    position: relative;
+}
+
+.checkbox_chon_sp_modal label input[type="checkbox"]:checked+span::before {
+    color: #fff;
+    border: 1px solid #690;
+    background: #690;
+    display: inline-flex;
+    content: '\f00c';
+    font-size: 13px;
+}
+
+.check_list_product label {
+    width: 100% !important;
+}
+
+.item-form-group {
+    display: flex;
+}
+.item-form-group input{
+    padding-left: 50px!important;
+    width: 100%;
+}
+.item-form-group label{
+    position: absolute;
+    left: 300px;
+    padding-top: 5px;
+    text-transform:none!important;
+}
+.icon-address {
+    padding-top: 10px;
+    height: 40px;
+    position: absolute;
+    left: 260px;
+}
+
+.location{
+  text-decoration: underline;
+  cursor: pointer;
+}

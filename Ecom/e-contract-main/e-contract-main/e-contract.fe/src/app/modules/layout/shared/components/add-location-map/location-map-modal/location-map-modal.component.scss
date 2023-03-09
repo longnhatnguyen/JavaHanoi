@@ -1,0 +1,11 @@
+.modal-body iframe{
+    width: 100%;
+    height:500px;
+}
+.modal-body .coords{
+    padding-bottom: 15px;
+    text-align: center;
+}
+.coords .coord-selected{
+    border-radius: 0;
+}

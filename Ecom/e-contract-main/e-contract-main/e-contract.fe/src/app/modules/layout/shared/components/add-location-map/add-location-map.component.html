@@ -1,0 +1,16 @@
+<div class="item-form-group">
+  <input
+    *ngIf="role == 'admin'"
+    type="text"
+    name="map"
+    pInputText
+    value="{{ locationShow }}"
+    placeholder="(longitude , latitude)"
+    (click)="openShowMapModal()"
+    class="form-control"
+  />
+
+  <div *ngIf="role == 'customer'" class="location" (click)="openShowMapModal()">
+    Click vào đây để xem tọa độ cửa hàng trên bản đồ
+  </div>
+</div>

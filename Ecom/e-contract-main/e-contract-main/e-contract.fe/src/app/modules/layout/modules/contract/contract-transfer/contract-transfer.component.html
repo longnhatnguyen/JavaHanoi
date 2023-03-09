@@ -1,0 +1,143 @@
+<div *ngIf="!loading">
+  <h1>Chi tiết hợp đồng</h1>
+  <hr />
+  <div class="wrap">
+    <form class="form-wrap col-12">
+      <div class="row col-3 mb-6 item">
+        <label class="col-lg-12 col-form-label fw-bold fs-6">
+          Mã hợp đồng
+        </label>
+        <input
+          type="text"
+          pInputText
+          placeholder="Mã hợp đồng"
+          [value]="contractDetail.contract_number"
+          [disabled]="true"
+          class="form-control"
+        />
+      </div>
+
+      <div class="row col-3 mb-6 item">
+        <label class="col-lg-12 col-form-label fw-bold fs-6">
+          Tên nhà đầu tư
+        </label>
+        <input
+          type="text"
+          pInputText
+          placeholder="Tên nhà đầu tư"
+          value="{{ contractDetail.customer_deputy }}"
+          [disabled]="true"
+          class="form-control"
+        />
+      </div>
+
+      <div class="row col-3 mb-6 item">
+        <label class="col-lg-12 col-form-label fw-bold fs-6">
+          Ngày ký hợp đồng
+        </label>
+        <ng-container *ngIf="contractDetail.status < 2; else noDate">
+          <input
+            type="text"
+            pInputText
+            placeholder="Ngày ký hợp đồng"
+            value="---"
+            [disabled]="true"
+            class="form-control"
+          />
+        </ng-container>
+        <ng-template #noDate>
+          <input
+            type="text"
+            pInputText
+            placeholder="Ngày ký hợp đồng"
+            value="{{
+              contractDetail.contract_signature_date | date: 'dd/MM/yyyy'
+            }}"
+            [disabled]="true"
+            class="form-control"
+          />
+        </ng-template>
+      </div>
+
+      <div class="row col-3 mb-6 item"></div>
+    </form>
+  </div>
+  <ng-container *ngIf="transferList?.length > 0; else noData">
+    <div class="list-item">
+      <div>
+        <h2 class="m-0">Danh sách phiên chuyển tiền</h2>
+      </div>
+    </div>
+    <div class="table-responsive card-body py-4">
+      <table
+        class="table align-middle table-row-dashed fs-6 gy-5"
+        id="kt_table_users"
+      >
+        <thead>
+          <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+            <th class="min-w-20px">STT</th>
+            <th class="min-w-125px">Tên đợt chuyển tiền</th>
+            <th class="min-w-125px">Số tiền chuyển</th>
+            <th class="min-w-125px">Ngày chuyển</th>
+            <th class="min-w-125px">Ảnh giao dịch chuyển khoản</th>
+            <th class="min-w-125px">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 fw-bold">
+          <tr *ngFor="let transfer of transferList; let i = index">
+            <td scope="">{{ stt + (i + 1) }}</td>
+            <td>{{ transfer.transfer_content }}</td>
+            <td>{{ transfer.transfer_amount | number }}</td>
+            <td>{{ transfer.dateAdded | date: "dd/MM/yyyy" }}</td>
+            <td>
+              <img
+                *ngIf="transfer?.image"
+                style="width: 50px; height: 50px; cursor: pointer"
+                src="{{ url }}{{ transfer?.image?.path }}"
+                (click)="showImage(i)"
+                alt=""
+              />
+              <app-zoom-image
+                *ngIf="showZoomImage == i + 1"
+                [fileItems]="[transfer.image]"
+                (dataReturn)="handleData(data)"
+              ></app-zoom-image>
+              <img
+                *ngIf="!transfer?.image"
+                style="width: 50px; height: 50px"
+                src="assets/img/null.jpg"
+                alt=""
+              />
+            </td>
+            <td
+              [ngClass]="{
+                pending: transfer.status == 1,
+                complete: transfer.status == 2
+              }"
+            >
+              {{ transfer.status_name }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination
+        [totalItems]="totalRows"
+        [maxSize]="5"
+        [itemsPerPage]="page_size"
+        class="pagination-sm"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;"
+        [boundaryLinks]="true"
+        (pageChanged)="onChangedPage($event)"
+        class="pull-right center"
+        style="margin-top: 10px"
+      ></pagination>
+    </div>
+  </ng-container>
+  <ng-template #noData>
+    <h5 style="text-align: center">Không có phiên chuyển tiền</h5>
+  </ng-template>
+</div>

@@ -1,0 +1,240 @@
+<div class="" id="kt_modal_add_user" tabindex="-1">
+  <div class="" style="margin: 0; width: 100%">
+    <div class="modal-content">
+      <div class="modal-header" id="kt_modal_add_user_header">
+        <h2 *ngIf="!itemDetail" class="fw-bolder">Thêm mới gói đầu tư</h2>
+        <h2 *ngIf="itemDetail" class="fw-bolder">Sửa thông tin gói đầu tư</h2>
+        <div
+          class="btn btn-icon btn-sm btn-active-icon-primary"
+          data-kt-users-modal-action="close"
+          (click)="close()"
+        >
+          <span class="svg-icon svg-icon-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <rect
+                opacity="0.5"
+                x="6"
+                y="17.3137"
+                width="16"
+                height="2"
+                rx="1"
+                transform="rotate(-45 6 17.3137)"
+                fill="black"
+              />
+              <rect
+                x="7.41422"
+                y="6"
+                width="16"
+                height="2"
+                rx="1"
+                transform="rotate(45 7.41422 6)"
+                fill="black"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+        <form
+          class=""
+          [formGroup]="formGroupCreate"
+          novalidate
+          id="kt_modal_add_user_form"
+          class="form"
+          action="#"
+        >
+          <!-- <div>{{ formGroupCreate.value | json }}</div> -->
+          <div
+            class="d-flex flex-column me-n7 pe-7 form-wrap"
+            id="kt_modal_add_user_scroll"
+            data-kt-scroll="true"
+            data-kt-scroll-activate="{default: false, lg: true}"
+            data-kt-scroll-max-height="auto"
+            data-kt-scroll-dependencies="#kt_modal_add_user_header"
+            data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+            data-kt-scroll-offset="300px"
+          >
+            <div class="fv-row mb-7">
+              <label class="required fw-bold fs-6 mb-2" for="Admin_name"
+                >Tên gói đầu tư</label
+              >
+              <input
+                type="text"
+                pInputText
+                formControlName="name"
+                class="form-control"
+                placeholder="Nhập tên gói đầu tư"
+              />
+              <div
+                *ngIf="
+                  !formGroupCreate.controls['name']?.valid &&
+                  formGroupCreate.controls['name']?.touched
+                "
+              >
+                <small
+                  *ngIf="formGroupCreate.get('name')?.errors?.['required']"
+                  style="color: red"
+                  >Tên gói đầu tư là bắt buộc</small
+                >
+                <small
+                  *ngIf="formGroupCreate.get('name')?.errors?.['maxlength']"
+                  style="color: red"
+                  >Chiều dài tên gói đầu tư không vượt quá 50 ký tự</small
+                >
+              </div>
+            </div>
+
+            <div class="fv-row mb-7">
+              <label class="required fw-bold fs-6 mb-2" for="Admin_phone_number"
+                >Giá trị gói đầu tư</label
+              >
+
+              <div class="col-12 md:col-7 lg:col-7 xl:col-7">
+                <div class="p-inputgroup col-12 md:col-12 lg:col-12 xl:col-12">
+                  <p-inputNumber
+                    autocomplete="off"
+                    inputId="locale-vie"
+                    mode="decimal"
+                    locale="vi-VN"
+                    [minFractionDigits]="0"
+                    aria-describedby="weight-help"
+                    formControlName="price"
+                    placeholder="Nhập giá trị đầu tư"
+                  >
+                  </p-inputNumber>
+                  <span class="p-inputgroup-addon">VNĐ</span>
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  !formGroupCreate.controls['price']?.valid &&
+                  formGroupCreate.controls['price']?.touched
+                "
+              >
+                <small
+                  *ngIf="formGroupCreate.get('price')?.errors?.['required']"
+                  style="color: red"
+                  >Giá trị đầu tư là bắt buộc</small
+                >
+              </div>
+            </div>
+
+            <div class="fv-row mb-7">
+              <label class="required fw-bold fs-6 mb-2" for="Admin_phone_number"
+                >Số cổ phần</label
+              >
+
+              <div class="col-12 md:col-7 lg:col-7 xl:col-7">
+                <div class="p-inputgroup col-12 md:col-12 lg:col-12 xl:col-12">
+                  <p-inputNumber
+                    autocomplete="off"
+                    inputId="locale-vie"
+                    mode="decimal"
+                    locale="vi-VN"
+                    [minFractionDigits]="0"
+                    aria-describedby="weight-help"
+                    formControlName="capital_value"
+                    placeholder="Nhập số cổ phần"
+                  >
+                  </p-inputNumber>
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  !formGroupCreate.controls['capital_value']?.valid &&
+                  formGroupCreate.controls['capital_value']?.touched
+                "
+              >
+                <small
+                  *ngIf="formGroupCreate.get('capital_value')?.errors?.['required']"
+                  style="color: red"
+                  >Số cổ phần là bắt buộc</small
+                >
+              </div>
+            </div>
+
+            <div class="fv-row mb-7">
+              <label class="required fw-bold fs-6 mb-2" for="Admin_phone_number"
+                >Giá trị lợi tức</label
+              >
+
+              <div class="col-12 md:col-7 lg:col-7 xl:col-7">
+                <div class="p-inputgroup col-12 md:col-12 lg:col-12 xl:col-12">
+                  <p-inputNumber
+                    autocomplete="off"
+                    inputId="locale-vie"
+                    mode="decimal"
+                    locale="vi-VN"
+                    [minFractionDigits]="0"
+                    aria-describedby="weight-help"
+                    formControlName="income"
+                    placeholder="Nhập giá trị lợi tức"
+                  >
+                  </p-inputNumber>
+                  <span class="p-inputgroup-addon">%</span>
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  !formGroupCreate.controls['income']?.valid &&
+                  formGroupCreate.controls['income']?.touched
+                "
+              >
+                <small
+                  *ngIf="formGroupCreate.get('income')?.errors?.['required']"
+                  style="color: red"
+                  >Giá trị lợi tức là bắt buộc</small
+                >
+              </div>
+            </div>
+
+            <div class="fv-row mb-7">
+              <label class="fw-bold fs-6 mb-2" for="Admin_name">Ghi chú</label>
+              <input
+                type="text"
+                pInputText
+                formControlName="note"
+                class="form-control"
+                placeholder="Nhập ghi chú"
+              />
+            </div>
+          </div>
+          <div class="text-center pt-15">
+            <button
+              type="reset"
+              class="btn btn-light me-3"
+              data-kt-users-modal-action="cancel"
+              (click)="close()"
+            >
+              Thoát
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-kt-users-modal-action="submit"
+              (click)="save()"
+              [disabled]="!formGroupCreate.valid"
+            >
+              <span class="indicator-label">Lưu</span>
+              <span class="indicator-progress"
+                >Please wait...
+                <span
+                  class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span
+              ></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

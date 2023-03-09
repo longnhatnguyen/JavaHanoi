@@ -1,0 +1,6 @@
+{
+  "ApiUrl": "https://api-dev.smartgapcontract.vn/api/",
+  "ClientId": "EContractSmartGap",
+  "UploadImg": "https://api-dev.smartgapcontract.vn/api/File",
+  "fileImageUrl": "https://api-dev.smartgapcontract.vn/api/file/view?url_file="
+}

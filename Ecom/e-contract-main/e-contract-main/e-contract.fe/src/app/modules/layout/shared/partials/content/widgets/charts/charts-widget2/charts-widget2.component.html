@@ -1,0 +1,96 @@
+<div
+  class="card-header border-0 pt-5 col-12"
+  style="display: flex; justify-content: space-between; align-items: center"
+>
+  <div
+    class="card-toolbar"
+    style="display: flex; justify-content: flex-end"
+    data-kt-buttons="true"
+    class="col-12"
+  >
+    <a
+      class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1"
+      id="kt_charts_widget_2_year_btn"
+      (click)="getData(1)"
+      [class.active]="type == 1"
+    >
+      Ngày
+    </a>
+
+    <a
+      class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1"
+      id="kt_charts_widget_2_month_btn"
+      (click)="getData(2)"
+      [class.active]="type == 2"
+    >
+      Tuần
+    </a>
+
+    <a
+      class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4"
+      id="kt_charts_widget_2_week_btn"
+      (click)="getData(3)"
+      [class.active]="type == 3"
+    >
+      Tháng
+    </a>
+  </div>
+  <h3
+    class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"
+    style="font-weight: 500; display: flex; justify-content: space-between"
+  >
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <div
+        style="display: flex; justify-content: flex-start; align-items: center"
+      >
+        <div style="background-color: #42a5f5; width: 40px; height: 10px"></div>
+        : Quỹ
+      </div>
+      <div
+        style="display: flex; justify-content: flex-start; align-items: center"
+      >
+        <div style="background-color: #66bb6a; width: 40px; height: 10px"></div>
+        : Doanh thu
+      </div>
+    </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
+      <div
+        style="display: flex; justify-content: flex-start; align-items: center"
+      >
+        <div style="background-color: #ffa726; width: 40px; height: 10px"></div>
+        : Giá cả
+      </div>
+      <div
+        style="display: flex; justify-content: flex-start; align-items: center"
+      >
+        <div style="background-color: #e04848; width: 40px; height: 10px"></div>
+        : Lợi nhuận
+      </div>
+    </div>
+  </h3>
+</div>
+
+<!-- begin::Body -->
+<div class="card-body">
+  <!-- begin::Chart -->
+  <div id="kt_charts_widget_2_chart" [style.height]="'350px'">
+    <apx-chart
+      #chartRef
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [stroke]="chartOptions.stroke"
+      [legend]="chartOptions.legend"
+      [fill]="chartOptions.fill"
+      [states]="chartOptions.states"
+      [tooltip]="chartOptions.tooltip"
+      [colors]="chartOptions.colors"
+      [markers]="chartOptions.markers"
+      [plotOptions]="chartOptions.plotOptions"
+    ></apx-chart>
+  </div>
+  <div class="row text-center pt-5"><p>Biểu đồ kinh doanh của smartgap</p></div>
+  <!-- end::Chart -->
+</div>
